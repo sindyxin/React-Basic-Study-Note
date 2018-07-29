@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="app">
+  </div>
+  <script>
+    class MyTitle extends React.Component{
+      render(){
+    //must return a react element
+        return React.createElement("h"+this.props.level, null, "Hello World") ; 
+      }
+    }
+    class MyTitleList extends React.Component{
+      constructor(props){
+        super(props);
+        this.state={maxLevel:3};
+        setTimeout(()=>{
+          
+          // this.setState({maxLevel:3});  //general change state
+          //relative change state
+          this.setState((currentState, currentProps)=>({
+            maxLevel:this.state.maxLevel+2
+          }));
+        }, 2000);
+      }
+      render(){
+        let titles=[];
+        let title;
+        for(let i=1; i<this.state.maxLevel; i++){
+          title=React.createElement(MyTitle, {level: i});
+          titles.push(title);
+        }
+        //must return a react element
+       return React.createElement("div", null, titles) ; 
+      }
+    }
+
+    let myComponent = React.createElement(MyTitleList, null);
+    ReactDOM.render(myComponent, document.body);
+
+  </script>
+  <script>
+    console.log("React",React);
+  </script>
+  
+</body>
+</html>

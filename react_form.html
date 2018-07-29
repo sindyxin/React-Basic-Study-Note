@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="app">
+  </div>
+  <script type="text/babel">
+    class MyForm extends React.Component{
+      constructor(props){
+        super(props);
+        this.state={text:"",
+        textarea:"",
+        selected:"male"}; //initialize state for record input data
+      }
+      render(){
+        //Set the value attribute in the input box to change the interface response data.
+        return <form onSubmit={this.handleSubmit.bind(this)}>       
+            <input type="text" value={this.state.text} onChange={this.handleTextChange.bind(this)} /> 
+            <textarea value={this.state.textarea} onChange={this.handleTextareaChange.bind(this)} ></textarea>
+            <select value={this.state.selected} onChange={this.handleBananaChange.bind(this)} >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+            <input type="submit" value="Submit" />
+          </form>;
+      }      
+      handleTextChange(e){
+        //e.currentTarget can get the data of the trigger event
+        this.setState({text:e.currentTarget.value});
+      }
+      handleTextareaChange(e){
+        this.setState({textarea:e.currentTarget.value});
+      }
+      handleBananaChange(e){
+        this.setState({selected:e.currentTarget.value});
+      }
+      handleSubmit(e){
+        e.preventDefault(); //Prevents browser-preset form processing actions
+        console.log("Submit"); //Click to submit the form and process it here.
+        console.log("text: "+this.state.text);
+        console.log("textarea: "+this.state.textarea);
+        console.log("selected: "+this.state.selected);
+      }
+    }
+    ReactDOM.render(<MyForm />, document.body);
+  </script>
+  <script>
+    console.log("React",React);
+  </script>
+  
+</body>
+</html>

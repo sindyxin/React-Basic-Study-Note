@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="app">
+  </div>
+  <script type="text/babel">
+    class MyTitle extends React.Component{
+      constructor(props){
+        super(props);
+        this.state={color:"red"};
+      }
+      render(){
+        //call bind to set the current component（this） to be a bound object
+        return <div onClick={this.clickHandler.bind(this)}
+          className={"Head-"+this.props.level}  
+          style={{color:this.state.color}}
+          onClick={this.clickHandler.bind(this)}
+          onMouseOver={this.onMouseOverHandler.bind(this)}
+          >Hello Component</div>;
+      }
+      clickHandler(e){
+        // alert("clicked");
+        this.setState({color:"green"});
+        console.log("trigger onclick event");
+        console.log(this.props); //this as current component, can get props or state     
+      }
+      onMouseOverHandler(e){
+        this.setState({color:"yellow"});
+      }
+    }
+    ReactDOM.render(<MyTitle level="3"/>, document.body);
+  </script>
+  <script>
+    console.log("React",React);
+  </script>
+  
+</body>
+</html>
